@@ -1,0 +1,14 @@
+{
+  "name": "rms-landing",
+  "version": "1.0.0",
+  "private": true,
+  "description": "RestoSuite landing page — static HTML + Tailwind (CDN). No build step.",
+  "scripts": {
+    "dev": "serve . -l 3000",
+    "start": "serve . -l 3000",
+    "build": "echo 'No build step needed — static HTML.'"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RestoSuite — Complete Restaurant Operating System</title>
+  <meta name="description" content="All-in-one restaurant platform for India. QR ordering, kitchen display, GST billing, online ordering — plus a free custom website. From Rs. 1,499/month with 30-day money-back guarantee." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50:'#FFF4ED',100:'#FFE6D5',300:'#FFA170',500:'#FF6B35',600:'#E94E1B',700:'#C03E13' },
+            ink: { 50:'#F5F6FA',500:'#4B5563',700:'#1F2937',900:'#0F0F1E' },
+            cream: '#FFF9F2', gold: '#F59E0B', mint: '#10B981',
+          },
+          fontFamily: {
+            sans: ['Inter','system-ui','sans-serif'],
+            display: ['"Playfair Display"','serif'],
+          },
+          backgroundImage: {
+            'hero-grad': 'radial-gradient(circle at 20% 0%, #FFE6D5 0%, transparent 40%), radial-gradient(circle at 80% 30%, #FFD0B0 0%, transparent 35%), linear-gradient(180deg, #FFF9F2 0%, #FFFFFF 100%)',
+            'pro-grad': 'linear-gradient(135deg, #FF6B35 0%, #E94E1B 100%)',
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #FFF9F2; color: #0F0F1E; }
+    .font-display { font-family: 'Playfair Display', serif; }
+    .nav-blur { backdrop-filter: saturate(180%) blur(12px); }
+    .gradient-text { background: linear-gradient(135deg, #FF6B35 0%, #E94E1B 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .ribbon { background: linear-gradient(90deg, #F59E0B, #FF6B35); }
+    .check { flex-shrink:0; width:1.1rem; height:1.1rem; border-radius:9999px; background:rgba(16,185,129,0.12); color:#10B981; display:inline-flex; align-items:center; justify-content:center; }
+    details[open] summary .arrow { transform: rotate(180deg); }
+    .arrow { transition: transform 0.25s ease; }
+    .pro-glow { box-shadow: 0 25px 70px -15px rgba(255,107,53,0.55); }
+    .pro-card-bg { background: radial-gradient(circle at 0% 0%, rgba(255,107,53,0.08), transparent 50%), radial-gradient(circle at 100% 100%, rgba(245,158,11,0.08), transparent 50%), white; }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- NAV -->
+  <header id="nav" class="fixed top-0 left-0 right-0 z-50 nav-blur bg-white/80 border-b border-brand-100/60">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2">
+        <div class="w-9 h-9 rounded-xl bg-pro-grad flex items-center justify-center text-white font-bold">R</div>
+        <span class="font-display font-bold text-xl">RestoSuite</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-ink-700">
+        <a href="#pro" class="hover:text-brand-600">Pro Plan</a>
+        <a href="#features" class="hover:text-brand-600">Features</a>
+        <a href="#pricing" class="hover:text-brand-600">Pricing</a>
+        <a href="#compare" class="hover:text-brand-600">Compare</a>
+        <a href="#faq" class="hover:text-brand-600">FAQ</a>
+      </nav>
+      <a href="#pro" class="bg-pro-grad text-white px-5 py-2.5 rounded-full text-sm font-semibold">Start with Pro</a>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="bg-hero-grad pt-32 pb-12">
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <div class="inline-flex items-center gap-2 bg-white/80 border border-brand-200 rounded-full px-4 py-1.5 mb-6 shadow-sm">
+        <span class="w-2 h-2 rounded-full bg-mint animate-pulse"></span>
+        <span class="text-sm font-medium text-ink-700">Built for Indian restaurants &middot; GST &amp; FSSAI ready</span>
+      </div>
+
+      <h1 class="font-display text-5xl md:text-7xl font-bold leading-[1.05] mb-6">
+        Run your restaurant.<br /><span class="gradient-text">We'll handle the tech.</span>
+      </h1>
+
+      <p class="text-lg md:text-xl text-ink-500 max-w-2xl mx-auto mb-8">
+        QR ordering, kitchen display, GST billing, online orders &mdash; plus a <strong class="text-ink-900">free custom website</strong>. From <strong class="text-ink-900">Rs. 1,499/month</strong> with a <strong class="text-ink-900">30-day money-back guarantee</strong>.
+      </p>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-5">
+        <a href="#pro" class="bg-pro-grad text-white px-7 py-3.5 rounded-full font-semibold">Start with Pro Plan</a>
+        <a href="#how" class="bg-white border border-ink-200 px-7 py-3.5 rounded-full font-semibold hover:border-brand-400">See How It Works</a>
+      </div>
+
+      <p class="text-sm text-ink-500">Rs. 0 setup &middot; 0% commission &middot; 30-day money-back guarantee</p>
+    </div>
+  </section>
+
+  <!-- PRO PLAN SPOTLIGHT -->
+  <section id="pro" class="pb-16 bg-hero-grad">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="relative pro-card-bg rounded-3xl border-2 border-brand-500 p-8 md:p-12 pro-glow">
+        <!-- Most Popular ribbon -->
+        <div class="absolute -top-4 left-1/2 -translate-x-1/2 ribbon text-white text-xs font-bold px-5 py-2 rounded-full whitespace-nowrap shadow-lg z-10">MOST POPULAR &middot; RECOMMENDED</div>
+
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <p class="text-brand-600 font-semibold uppercase tracking-wider text-sm mb-2">The Pro Plan</p>
+            <h2 class="font-display text-4xl md:text-5xl font-bold text-ink-900 leading-tight mb-4">
+              Everything your restaurant needs.
+            </h2>
+            <div class="flex items-baseline gap-2 mb-4">
+              <span class="font-display text-5xl font-bold gradient-text">Rs. 2,999</span>
+              <span class="text-ink-500">/month</span>
+            </div>
+            <p class="text-ink-500 mb-3 leading-relaxed">
+              Annual: <strong class="text-mint">Rs. 29,999/year</strong> (save 2 months). 30-day money-back guarantee &mdash; if it's not for you, we refund your first month and cancel.
+            </p>
+            <p class="text-xs text-ink-500 mb-6 italic">*Domain registration (~Rs. 500-999/year) is payable by you directly to the registrar.</p>
+            <div class="flex flex-col sm:flex-row gap-3">
+              <a href="mailto:samara@infyskill.in?subject=Start%20with%20Pro%20Plan" class="text-center bg-pro-grad text-white px-6 py-3 rounded-full font-semibold">Start with Pro</a>
+              <a href="https://wa.me/917995439913?text=Hi%2C%20I%20want%20to%20start%20with%20the%20Pro%20plan" class="text-center bg-white border border-ink-200 px-6 py-3 rounded-full font-semibold hover:border-brand-400">Chat on WhatsApp</a>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 gap-3">
+            <div class="bg-white rounded-2xl p-4 border border-brand-100 flex items-start gap-3">
+              <span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+              <div>
+                <p class="font-semibold text-ink-900 text-sm">Free custom website + photos + reviews</p>
+                <p class="text-xs text-ink-500">10+ pages, gallery, reservations, online ordering.</p>
+              </div>
+            </div>
+            <div class="bg-white rounded-2xl p-4 border border-brand-100 flex items-start gap-3">
+              <span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+              <div>
+                <p class="font-semibold text-ink-900 text-sm">QR ordering + Kitchen display + GST billing</p>
+                <p class="text-xs text-ink-500">Unlimited tables, offline mode, GSTR-1 export.</p>
+              </div>
+            </div>
+            <div class="bg-white rounded-2xl p-4 border border-brand-100 flex items-start gap-3">
+              <span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+              <div>
+                <p class="font-semibold text-ink-900 text-sm">Click-to-WhatsApp nearest waiter</p>
+                <p class="text-xs text-ink-500">Zone-based routing. Diner taps once, waiter walks over.</p>
+              </div>
+            </div>
+            <div class="bg-white rounded-2xl p-4 border border-brand-100 flex items-start gap-3">
+              <span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+              <div>
+                <p class="font-semibold text-ink-900 text-sm">Online orders, loyalty &amp; reservations</p>
+                <p class="text-xs text-ink-500">0% commission. Direct delivery &amp; takeaway through your site.</p>
+              </div>
+            </div>
+            <div class="bg-white rounded-2xl p-4 border border-brand-100 flex items-start gap-3">
+              <span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>
+              <div>
+                <p class="font-semibold text-ink-900 text-sm">Inventory + 20 staff logins + WhatsApp support</p>
+                <p class="text-xs text-ink-500">Recipe-based stock, multi-language menu, priority support.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS STRIP -->
+  <section class="bg-white border-y border-brand-100 py-8">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div><div class="font-display text-3xl font-bold gradient-text">Rs. 0</div><div class="text-xs text-ink-500 mt-1">Setup fee</div></div>
+      <div><div class="font-display text-3xl font-bold gradient-text">0%</div><div class="text-xs text-ink-500 mt-1">Commission</div></div>
+      <div><div class="font-display text-3xl font-bold gradient-text">1 week</div><div class="text-xs text-ink-500 mt-1">Website live</div></div>
+      <div><div class="font-display text-3xl font-bold gradient-text">1 month</div><div class="text-xs text-ink-500 mt-1">Full SaaS live</div></div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="py-20 bg-cream">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <p class="text-brand-600 font-semibold uppercase tracking-wider text-sm mb-2">Everything Included</p>
+        <h2 class="font-display text-4xl md:text-5xl font-bold leading-tight">One platform. Everything you need.</h2>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="bg-gradient-to-br from-brand-50 to-white rounded-2xl p-6 border-2 border-brand-200 relative">
+          <div class="absolute top-3 right-3 ribbon text-white text-xs font-bold px-2.5 py-1 rounded-full">FREE</div>
+          <div class="w-12 h-12 rounded-xl bg-pro-grad flex items-center justify-center text-white mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582"/></svg>
+          </div>
+          <h3 class="font-bold text-lg mb-1">Custom Website</h3>
+          <p class="text-sm text-ink-500">Your branding, photos, menu, reviews &mdash; built and hosted free.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-ink-50">
+          <div class="w-12 h-12 rounded-xl bg-gold/10 text-gold flex items-center justify-center mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 4.875c0-1.036.84-1.875 1.875-1.875h4.5c1.036 0 1.875.84 1.875 1.875v4.5c0 1.036-.84 1.875-1.875 1.875h-4.5A1.875 1.875 0 013.75 9.375v-4.5zM3.75 14.625c0-1.036.84-1.875 1.875-1.875h4.5c1.036 0 1.875.84 1.875 1.875v4.5c0 1.036-.84 1.875-1.875 1.875h-4.5a1.875 1.875 0 01-1.875-1.875v-4.5zM13.5 4.875c0-1.036.84-1.875 1.875-1.875h4.5c1.036 0 1.875.84 1.875 1.875v4.5c0 1.036-.84 1.875-1.875 1.875h-4.5A1.875 1.875 0 0113.5 9.375v-4.5z"/></svg>
+          </div>
+          <h3 class="font-bold text-lg mb-1">QR Dine-In Ordering</h3>
+          <p class="text-sm text-ink-500">Scan, order, pay via UPI. No app to install.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-ink-50">
+          <div class="w-12 h-12 rounded-xl bg-mint/10 text-mint flex items-center justify-center mb-4">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </div>
+          <h3 class="font-bold text-lg mb-1">WhatsApp Waiter</h3>
+          <p class="text-sm text-ink-500">One tap connects diner to nearest waiter on WhatsApp.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-ink-50">
+          <div class="w-12 h-12 rounded-xl bg-brand-100 text-brand-600 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25m18 0A2.25 2.25 0 0018.75 3H5.25A2.25 2.25 0 003 5.25"/></svg>
+          </div>
+          <h3 class="font-bold text-lg mb-1">Kitchen Display</h3>
+          <p class="text-sm text-ink-500">Live order tickets. Works offline. No paper KOTs.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-ink-50">
+          <div class="w-12 h-12 rounded-xl bg-gold/10 text-gold flex items-center justify-center mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664"/></svg>
+          </div>
+          <h3 class="font-bold text-lg mb-1">GST &amp; FSSAI Ready</h3>
+          <p class="text-sm text-ink-500">Auto CGST/SGST split, HSN codes, GSTR-1 export.</p>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 border border-ink-50">
+          <div class="w-12 h-12 rounded-xl bg-mint/10 text-mint flex items-center justify-center mb-4">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272"/></svg>
+          </div>
+          <h3 class="font-bold text-lg mb-1">Online Orders, 0% Commission</h3>
+          <p class="text-sm text-ink-500">Direct delivery &amp; takeaway. Zero commission, ever.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="py-20 bg-ink-900 text-white">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <p class="text-brand-300 font-semibold uppercase tracking-wider text-sm mb-2">In 4 Simple Steps</p>
+        <h2 class="font-display text-4xl md:text-5xl font-bold leading-tight">Scan to served &mdash; faster.</h2>
+      </div>
+      <div class="grid md:grid-cols-4 gap-5">
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <div class="w-10 h-10 rounded-full bg-pro-grad flex items-center justify-center font-bold mb-4">1</div>
+          <h3 class="font-bold mb-1">Scan QR</h3>
+          <p class="text-sm text-white/60">Menu opens in browser.</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <div class="w-10 h-10 rounded-full bg-pro-grad flex items-center justify-center font-bold mb-4">2</div>
+          <h3 class="font-bold mb-1">Order &amp; Pay</h3>
+          <p class="text-sm text-white/60">Browse, order, UPI pay.</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <div class="w-10 h-10 rounded-full bg-pro-grad flex items-center justify-center font-bold mb-4">3</div>
+          <h3 class="font-bold mb-1">Kitchen Cooks</h3>
+          <p class="text-sm text-white/60">Live status updates.</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <div class="w-10 h-10 rounded-full bg-pro-grad flex items-center justify-center font-bold mb-4">4</div>
+          <h3 class="font-bold mb-1">Rate &amp; Return</h3>
+          <p class="text-sm text-white/60">Loyalty points saved.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing" class="py-20 bg-cream">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <p class="text-brand-600 font-semibold uppercase tracking-wider text-sm mb-2">All Plans</p>
+        <h2 class="font-display text-4xl md:text-5xl font-bold leading-tight">Pick a plan. Cancel risk-free.</h2>
+        <p class="text-ink-500 mt-3">No setup fee. 30-day money-back guarantee on your first month.</p>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-5 max-w-5xl mx-auto">
+        <!-- Standard - WEBSITE ONLY -->
+        <div class="bg-white rounded-2xl p-7 border border-ink-50 flex flex-col">
+          <h3 class="font-display text-xl font-bold mb-1">Standard</h3>
+          <p class="text-ink-500 text-sm mb-5">Just need an online presence</p>
+          <div class="mb-5">
+            <div class="flex items-baseline gap-1"><span class="font-display text-4xl font-bold">Rs. 1,499</span><span class="text-ink-500 text-sm">/mo</span></div>
+            <p class="text-xs text-mint font-semibold mt-1">Annual: Rs. 14,999/yr</p>
+          </div>
+          <a href="mailto:samara@infyskill.in?subject=Standard%20Plan%20Inquiry" class="block text-center bg-ink-900 text-white px-6 py-3 rounded-full font-semibold mb-6">Get Started</a>
+          <div class="text-xs uppercase tracking-wider text-brand-600 font-semibold mb-3">Static website only</div>
+          <ul class="space-y-2.5 text-sm text-ink-700 flex-1">
+            <li class="flex items-start gap-2.5"><span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>Custom static website (5 pages)</li>
+            <li class="flex items-start gap-2.5"><span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>Hosting + SSL (your domain)</li>
+            <li class="flex items-start gap-2.5"><span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>Mobile-responsive + Google Maps</li>
+            <li class="flex items-start gap-2.5"><span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>Click-to-WhatsApp on every page</li>
+            <li class="flex items-start gap-2.5"><span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>Basic SEO + Google Business setup</li>
+            <li class="flex items-start gap-2.5"><span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>1 content update per month</li>
+            <li class="flex items-start gap-2.5 text-ink-500"><span class="flex-shrink-0 mt-0.5">&mdash;</span>No QR ordering, KDS or billing</li>
+            <li class="flex items-start gap-2.5"><span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>Email support</li>
+          </ul>
+        </div>
+
+        <!-- Pro -->
+        <div class="relative bg-white rounded-2xl p-7 border-2 border-brand-500 flex flex-col pro-glow lg:scale-105">
+          <div class="absolute -top-3 left-1/2 -translate-x-1/2 ribbon text-white text-xs font-bold px-3 py-1 rounded-full">MOST POPULAR</div>
+          <h3 class="font-display text-xl font-bold text-brand-600 mb-1">Pro</h3>
+          <p class="text-ink-500 text-sm mb-5">Mid-size restaurants</p>
+          <div class="mb-5">
+            <div class="flex items-baseline gap-1"><span class="font-display text-4xl font-bold gradient-text">Rs. 2,999</span><span class="text-ink-500 text-sm">/mo</span></div>
+            <p class="text-xs text-mint font-semibold mt-1">Annual: Rs. 29,999/yr</p>
+          </div>
+          <a href="mailto:samara@infyskill.in?subject=Start%20with%20Pro%20Plan" class="block text-center bg-pro-grad text-white px-6 py-3 rounded-full font-semibold mb-6">Start with Pro</a>
+          <div class="text-xs uppercase tracking-wider text-brand-600 font-semibold mb-3">Full Restaurant OS</div>
+          <ul class="space-y-2.5 text-sm text-ink-700 flex-1">
+            <li class="flex items-start gap-2.5"><span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><strong>Premium dynamic website (10+ pages, photos, reviews)</strong></li>
+            <li class="flex items-start gap-2.5"><span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>QR ordering, unlimited tables</li>
+            <li class="flex items-start gap-2.5"><span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>Kitchen display + GST billing + KOT</li>
+            <li class="flex items-start gap-2.5"><span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>Online ordering + reservations</li>
+            <li class="flex items-start gap-2.5"><span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>WhatsApp waiter (zone-based)</li>
+            <li class="flex items-start gap-2.5"><span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>Loyalty + inventory + reviews</li>
+            <li class="flex items-start gap-2.5"><span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>20 staff logins, 100 QR stickers</li>
+            <li class="flex items-start gap-2.5"><span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>Priority WhatsApp support</li>
+          </ul>
+        </div>
+
+        <!-- Advanced -->
+        <div class="bg-white rounded-2xl p-7 border border-ink-50 flex flex-col">
+          <h3 class="font-display text-xl font-bold mb-1">Advanced</h3>
+          <p class="text-ink-500 text-sm mb-5">Multi-outlet &amp; fine dining</p>
+          <div class="mb-5">
+            <div class="flex items-baseline gap-1"><span class="font-display text-4xl font-bold">Rs. 4,999</span><span class="text-ink-500 text-sm">/mo</span></div>
+            <p class="text-xs text-mint font-semibold mt-1">Annual: Rs. 49,999/yr</p>
+          </div>
+          <a href="mailto:samara@infyskill.in?subject=Advanced%20Plan%20Inquiry" class="block text-center bg-ink-900 text-white px-6 py-3 rounded-full font-semibold mb-6">Talk to Sales</a>
+          <div class="text-xs uppercase tracking-wider text-brand-600 font-semibold mb-3">Multi-outlet OS</div>
+          <ul class="space-y-2.5 text-sm text-ink-700 flex-1">
+            <li class="flex items-start gap-2.5"><span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span><strong>Everything in Pro +</strong></li>
+            <li class="flex items-start gap-2.5"><span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>Multi-outlet (up to 3, centralised)</li>
+            <li class="flex items-start gap-2.5"><span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>CRM + marketing campaigns</li>
+            <li class="flex items-start gap-2.5"><span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>Captain tablet ordering</li>
+            <li class="flex items-start gap-2.5"><span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>API access for accounting/ERP</li>
+            <li class="flex items-start gap-2.5"><span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>Advanced analytics + heatmaps</li>
+            <li class="flex items-start gap-2.5"><span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>Unlimited staff &amp; QR stickers</li>
+            <li class="flex items-start gap-2.5"><span class="check mt-0.5"><svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span>24x7 phone + dedicated manager</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="text-center text-xs text-ink-500 mt-8 max-w-2xl mx-auto leading-relaxed">
+        Domain registration (~Rs. 500-999/year) is paid by you directly. Hosting, SSL &amp; everything else is on us. Try any plan with our 30-day money-back guarantee &mdash; pay first month, full refund if not satisfied. Cancel within first 12 months from website go-live and a one-time Website Recovery Fee applies (Rs. 15K / 25K / 50K). After 12 months, cancel free.
+      </p>
+    </div>
+  </section>
+
+  <!-- COMPARE -->
+  <section id="compare" class="py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-10">
+        <p class="text-brand-600 font-semibold uppercase tracking-wider text-sm mb-2">Why We Win</p>
+        <h2 class="font-display text-4xl md:text-5xl font-bold leading-tight">See how we compare.</h2>
+      </div>
+      <div class="overflow-x-auto rounded-2xl border border-brand-100">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-cream">
+              <th class="text-left p-4 font-semibold text-ink-700">Feature</th>
+              <th class="p-4 font-semibold text-ink-500">Petpooja</th>
+              <th class="p-4 font-semibold text-ink-500">Posist</th>
+              <th class="p-4 font-semibold text-ink-500">DotPe</th>
+              <th class="p-4 font-bold bg-pro-grad text-white">RestoSuite</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-brand-100">
+            <tr><td class="p-4 font-medium">Setup fee</td><td class="p-4 text-center text-ink-500">Rs. 3-8K</td><td class="p-4 text-center text-ink-500">Rs. 10K+</td><td class="p-4 text-center text-ink-500">Rs. 0</td><td class="p-4 text-center font-bold text-mint">Rs. 0</td></tr>
+            <tr class="bg-cream/50"><td class="p-4 font-medium">Custom website</td><td class="p-4 text-center text-ink-500">Extra</td><td class="p-4 text-center text-ink-500">Extra</td><td class="p-4 text-center text-ink-500">Basic</td><td class="p-4 text-center font-bold text-mint">Free</td></tr>
+            <tr><td class="p-4 font-medium">Online commission</td><td class="p-4 text-center text-ink-500">0%</td><td class="p-4 text-center text-ink-500">0%</td><td class="p-4 text-center text-brand-600 font-semibold">2%</td><td class="p-4 text-center font-bold text-mint">0%</td></tr>
+            <tr class="bg-cream/50"><td class="p-4 font-medium">Risk-free trial</td><td class="p-4 text-center text-ink-500">7 days</td><td class="p-4 text-center text-ink-500">Demo</td><td class="p-4 text-center text-ink-500">None</td><td class="p-4 text-center font-bold text-mint">30-day money-back</td></tr>
+            <tr><td class="p-4 font-medium">Annual lock-in</td><td class="p-4 text-center text-ink-500">Yes</td><td class="p-4 text-center text-ink-500">Yes</td><td class="p-4 text-center text-ink-500">No</td><td class="p-4 text-center font-bold text-mint">No</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="py-20 bg-cream">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="text-center mb-10">
+        <p class="text-brand-600 font-semibold uppercase tracking-wider text-sm mb-2">FAQ</p>
+        <h2 class="font-display text-4xl md:text-5xl font-bold leading-tight">Quick answers.</h2>
+      </div>
+      <div class="space-y-3">
+        <details class="bg-white rounded-2xl border border-brand-100">
+          <summary class="cursor-pointer p-4 font-semibold flex items-center justify-between list-none">
+            How does the 30-day money-back guarantee work?
+            <svg class="arrow w-5 h-5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+          </summary>
+          <div class="px-4 pb-4 text-sm text-ink-500">You pay your first month upfront. If within 30 days you're not satisfied for any reason, we issue a full refund of that month and cancel your account &mdash; no questions asked. You don't lose a single rupee on the trial.</div>
+        </details>
+        <details class="bg-white rounded-2xl border border-brand-100">
+          <summary class="cursor-pointer p-4 font-semibold flex items-center justify-between list-none">
+            Why is Pro highlighted as the recommended plan?
+            <svg class="arrow w-5 h-5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+          </summary>
+          <div class="px-4 pb-4 text-sm text-ink-500">Standard gives you only a static website. Pro is the full Restaurant OS &mdash; QR ordering, kitchen display, GST billing, online orders, loyalty, inventory and the premium dynamic website. Most restaurants need everything in Pro from day one.</div>
+        </details>
+        <details class="bg-white rounded-2xl border border-brand-100">
+          <summary class="cursor-pointer p-4 font-semibold flex items-center justify-between list-none">
+            What's the difference between Standard and Pro websites?
+            <svg class="arrow w-5 h-5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+          </summary>
+          <div class="px-4 pb-4 text-sm text-ink-500">Standard is a static 5-page website &mdash; perfect if you only want an online presence. Pro adds dynamic features: photo gallery, customer reviews, online ordering, reservations, loyalty integration, and the entire restaurant operations stack.</div>
+        </details>
+        <details class="bg-white rounded-2xl border border-brand-100">
+          <summary class="cursor-pointer p-4 font-semibold flex items-center justify-between list-none">
+            Is GST handled correctly?
+            <svg class="arrow w-5 h-5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+          </summary>
+          <div class="px-4 pb-4 text-sm text-ink-500">Yes. Auto CGST/SGST/IGST split, HSN codes, FSSAI on bill, sequential invoicing, one-click GSTR-1 export. CCPA-compliant service charge handling.</div>
+        </details>
+        <details class="bg-white rounded-2xl border border-brand-100">
+          <summary class="cursor-pointer p-4 font-semibold flex items-center justify-between list-none">
+            Can I cancel anytime?
+            <svg class="arrow w-5 h-5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+          </summary>
+          <div class="px-4 pb-4 text-sm text-ink-500">Yes. No annual contract. First 30 days are money-back guaranteed. After that, if you cancel within 12 months from website go-live, a one-time Website Recovery Fee applies (Rs. 15K/25K/50K) since the website was built free upfront. After 12 months, free cancellation.</div>
+        </details>
+        <details class="bg-white rounded-2xl border border-brand-100">
+          <summary class="cursor-pointer p-4 font-semibold flex items-center justify-between list-none">
+            Do you really charge 0% commission?
+            <svg class="arrow w-5 h-5 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+          </summary>
+          <div class="px-4 pb-4 text-sm text-ink-500">Yes. Zero commission on dine-in and online orders through your site. Only your payment gateway (Razorpay) charges its standard fee &mdash; that goes to them, not us.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="contact" class="py-20 bg-pro-grad">
+    <div class="max-w-3xl mx-auto px-6 text-center">
+      <h2 class="font-display text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">Ready to transform your restaurant?</h2>
+      <p class="text-lg text-white/90 mb-8">Start with the Pro plan today. 30-day money-back guarantee. Website live in 1 week, full SaaS in 1 month.</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="mailto:samara@infyskill.in?subject=Start%20with%20Pro%20Plan" class="bg-white text-brand-600 px-7 py-3.5 rounded-full font-bold">Start with Pro</a>
+        <a href="https://wa.me/917995439913?text=Hi%2C%20I%20want%20to%20know%20more%20about%20RestoSuite" class="bg-ink-900/20 backdrop-blur border-2 border-white/30 text-white px-7 py-3.5 rounded-full font-bold flex items-center gap-2">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+          WhatsApp
+        </a>
+      </div>
+      <p class="text-white/70 text-sm mt-6">samara@infyskill.in &middot; +91 79954 39913</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-ink-900 text-white py-10">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/60">
+      <div class="flex items-center gap-2">
+        <div class="w-7 h-7 rounded-lg bg-pro-grad flex items-center justify-center font-bold text-white">R</div>
+        <span class="font-display font-bold text-white">RestoSuite</span>
+        <span class="ml-3">&copy; 2026</span>
+      </div>
+      <div class="flex flex-col md:flex-row gap-4 md:gap-6 items-center">
+        <a href="mailto:samara@infyskill.in" class="hover:text-white">samara@infyskill.in</a>
+        <a href="https://wa.me/917995439913" class="hover:text-white">+91 79954 39913</a>
+        <a href="#" class="hover:text-white">Privacy</a>
+        <a href="#" class="hover:text-white">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
